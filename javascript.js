@@ -1,6 +1,6 @@
 var gameBoard = (() => {
 
-    const board = [["", "", ""],
+    const board = [["X", "", ""],
                    ["", "", ""],
                    ["", "", ""]];
     const spots = {"div1" : board[0][0], "div2" : board[0][1], "div3" : board[0][2],
@@ -34,17 +34,27 @@ var gameLogic = (() => {
 const divButtons = (() => {
     var divs = Array.from(document.getElementsByClassName("board-div"));
     const assignHandlers = () =>{
-        divs.forEach((element) => element.addEventListener("click", () => getElement(element)));
+        divs.forEach((div) => div.addEventListener("click", () => spotCheck(div)));
     };
-    const getElement = (element) =>{
-        console.log(element.id, "hi");
+    const getElement = (div) =>{
+        console.log(div.id, "hi");
     }
     return {assignHandlers};
 
 })()
 const spotCheck = (() =>{
+    const checkSpot = div => {
+        // console.log(div.id, "hi")
+        console.log(gameBoard.board)
+        console.log(gameBoard.spots[div.id])
+        console.log(gameBoard.spots[div.id])
 
+        if (gameBoard.spots[div.id] === ""){
+            console.log("noice")
+        }
 
+    }
+    return checkSpot;
 
 })();
 
@@ -68,9 +78,10 @@ return {name}
 
 
 
-const gameLoop = (() => {
-    const divLogic = divButtons;
-    const spotcheck = spotCheck;
+var gameLoop = (() => {
+    var spotcheck = spotCheck;
+    var divLogic = divButtons;
+    // var gameBoard = GameBoard;
     divLogic.assignHandlers();
 
 
@@ -78,4 +89,4 @@ const gameLoop = (() => {
 
 })();
 
-const gameL = gameLoop;
+var gameL = gameLoop;
