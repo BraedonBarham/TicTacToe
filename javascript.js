@@ -1,13 +1,25 @@
 var gameBoard = (() => {
 
-    const board = [["X", "", ""],
-                   ["", "", ""],
-                   ["", "", ""]];
-    const spots = {"div1" : board[0][0], "div2" : board[0][1], "div3" : board[0][2],
-                    "div4" : board[1][0], "div5" : board[1][1], "div6" : board[1][2],
-                    "div7" : board[2][0], "div8" : board[2][1], "div9" : board[2][2]};
-                    // console.log(gameBoard.spots["div1"])
-    return {board, spots};
+    // const board2 = [["X", "", ""],
+    //                ["", "", ""],
+    //                ["", "", ""]];
+    // const spots = {"div1" : board[0][0], "div2" : board[0][1], "div3" : board[0][2],
+    //                 "div4" : board[1][0], "div5" : board[1][1], "div6" : board[1][2],
+    //                 "div7" : board[2][0], "div8" : board[2][1], "div9" : board[2][2]
+    //             };
+    const board = {"div1" : "", "div2" : "", "div3" : "",
+                    "div4" : "", "div5" : "", "div6" : "",
+                    "div7" : "", "div8" : "", "div9" : ""};
+
+    const updateBoard = (divID, player) => {
+        gameBoard.board[divID] = player;
+        divElement = document.getElementById(divID)
+        divElement
+
+    }
+
+
+    return {board, updateBoard};
 })();
 
 var gameLogic = (() => {
@@ -34,57 +46,77 @@ var gameLogic = (() => {
 const divButtons = (() => {
     var divs = Array.from(document.getElementsByClassName("board-div"));
     const assignHandlers = () =>{
-        divs.forEach((div) => div.addEventListener("click", () => spotCheck(div)));
+        divs.forEach((div) => div.addEventListener("click", function() {
+        spotCheck.checkSpot(div);
+        spotCheck.addUserPick(div);
+         }));
     };
-    const getElement = (div) =>{
-        console.log(div.id, "hi");
-    }
     return {assignHandlers};
 
 })()
 const spotCheck = (() =>{
     const checkSpot = div => {
-        // console.log(div.id, "hi")
         console.log(gameBoard.board)
-        console.log(gameBoard.spots[div.id])
-        console.log(gameBoard.spots[div.id])
-
-        if (gameBoard.spots[div.id] === ""){
-            console.log("noice")
+        if (gameBoard.board[div.id] === ""){
+            console.log("Empty space")
         }
 
     }
-    return checkSpot;
+    const addUserPick = (div) => {
+        if (gameBoard.board[div.id] !== ""){
+            console.log("Spot already filled with " + gameBoard.board[div.id]);
+        }
+        else if (gameBoard.board[div.id] === ""){
+            if (currentPlayer.getTurn() === 'X'){
+                gameBoard.updateBoard(div.id, 'X')
+                currentPlayer.changeTurn()
+                displayControl.displayBoard();
+
+            }
+            else if (currentPlayer.getTurn() === 'O'){
+                gameBoard.updateBoard(div.id, 'O')
+                currentPlayer.changeTurn()
+                displayControl.displayBoard()
+            }
+        }
+    }
+
+    return {checkSpot, addUserPick};
 
 })();
 
 
 
-const displayControl = () =>{
-    const pickSpot = () =>{
-
+const displayControl = (() => {
+    const displayBoard = () =>{
+        console.log(gameBoard.board)
     }
+    return {displayBoard}
+})();
 
-
-}
-
-const players = (name) => {
-    const pickSpot = (spot) =>{
-
+const playerLogic = (startingPlayer) => {
+    var turn = startingPlayer
+    const changeTurn = () => {
+        if (turn === 'X'){
+            turn = 'O'
+            return 'O'
+        }
+        else {
+            turn = 'X'
+            return 'X'
+        }
     }
+    const getTurn = () => turn;
 
-return {name}
-}
+return {changeTurn, getTurn}
+};
 
 
 
 var gameLoop = (() => {
-    var spotcheck = spotCheck;
     var divLogic = divButtons;
-    // var gameBoard = GameBoard;
     divLogic.assignHandlers();
-
-
+    currentPlayer = playerLogic('X')
     return;
 
 })();
