@@ -41,6 +41,11 @@ body{
 
 }
 .board-div{
+    display: flex;
+    font-size: 3em;
+
+    justify-content: center;
+    align-items: center;
     margin-left: .8vh;
     margin-top: .75vh;
     background-color: blanchedalmond;

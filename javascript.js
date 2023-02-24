@@ -14,7 +14,8 @@ var gameBoard = (() => {
     const updateBoard = (divID, player) => {
         gameBoard.board[divID] = player;
         divElement = document.getElementById(divID)
-        divElement
+        playerChoice = document.createTextNode(player)
+        divElement.appendChild(playerChoice)
 
     }
 
