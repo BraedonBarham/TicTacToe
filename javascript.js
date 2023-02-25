@@ -143,10 +143,15 @@ var gameLogic = (() => {
         let row = checkRow()
         let column = checkColumn()
         let diagonals = checkDiagonals()
+        console.log(row)
+        console.log(column)
+
+        console.log(diagonals)
+
         if (gameBoard.board["div1"] !== '' && gameBoard.board["div2"] !== ''  && gameBoard.board["div3"] !== ''
             && gameBoard.board["div4"] !== '' && gameBoard.board["div5"] !== ''  && gameBoard.board["div6"] !== ''
             && gameBoard.board["div7"] !== '' && gameBoard.board["div8"] !== ''  && gameBoard.board["div9"] !== '' 
-            && row == false && column == false && diagonals == false){
+            && row == undefined && column == undefined && diagonals == undefined){
                 displayControl.displayWinner("Tie! Nobody ")
             }
 
