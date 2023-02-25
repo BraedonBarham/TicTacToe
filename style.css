@@ -42,7 +42,7 @@ body{
 }
 .board-div{
     display: flex;
-    font-size: 3em;
+    font-size: 2.5em;
 
     justify-content: center;
     align-items: center;
@@ -51,4 +51,20 @@ body{
     background-color: blanchedalmond;
     width:15vh;
     height:15vh;
+}
+.player-won{
+    opacity : 0; transition:opacity 2s;
+    /* display: none transition:; */
+}
+.body-container-player-win{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 4rem;
+}
+.play-again-button{
+    font-size: 2rem;
+    padding: 3vw
+
 }
